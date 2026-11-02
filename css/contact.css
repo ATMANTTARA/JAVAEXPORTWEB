@@ -1,0 +1,134 @@
+/* ===========================================================
+   CONTACT PAGE
+   Menggunakan variabel warna dari style.css (:root)
+=========================================================== */
+
+.contact-page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--header-h-mobile) + var(--space-10)) var(--section-pad-x)
+    var(--section-pad-y-mobile);
+}
+
+@media (min-width: 768px) {
+  .contact-page {
+    padding-top: calc(var(--header-h-desktop) + var(--space-12));
+    padding-bottom: var(--section-pad-y-desktop);
+  }
+}
+
+.contact-page__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .contact-page__grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+}
+
+/* ============ KOLOM KIRI: INFO ============ */
+.contact-info__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+.contact-info__desc {
+  margin-top: var(--space-5);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--dark);
+  opacity: 0.8;
+  max-width: 480px;
+}
+
+.contact-info__block {
+  margin-top: var(--space-8);
+}
+
+.contact-info__block h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: var(--space-2);
+}
+
+.contact-info__block p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--dark);
+  opacity: 0.8;
+}
+
+/* ============ KOLOM KANAN: FORM ============ */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--dark);
+  background: var(--surface);
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 10px;
+  padding: var(--space-4);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--dark);
+  opacity: 0.45;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--teal-mid);
+  background: var(--surface);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* Link nav "Contact Us" aktif (halaman saat ini) */
+.navbar__nav > a.is-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

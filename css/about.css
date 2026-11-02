@@ -1,0 +1,604 @@
+/* ===========================================================
+   ABOUT US PAGE
+   Menggunakan variabel warna & spacing dari style.css (:root)
+=========================================================== */
+
+:root {
+  /* Padding kanan-kiri khusus halaman About — lebih lega di layar lebar
+     dibanding --section-pad-x bawaan (24px tetap), supaya konten tidak
+     mepet ke ujung di laptop/desktop. Tetap 24px di layar sempit/mobile. */
+  --about-pad-x: clamp(24px, 6vw, 96px);
+}
+
+/* ============ HERO / PAGE INTRO ============ */
+.about-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--header-h-mobile) + var(--space-10)) var(--about-pad-x)
+    var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-hero {
+    padding-top: calc(var(--header-h-desktop) + var(--space-12));
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-16);
+  }
+}
+
+.about-hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: var(--space-3);
+}
+
+.about-hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1.1;
+  color: var(--navy);
+}
+
+.about-hero__tagline {
+  margin-top: var(--space-4);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--teal-mid);
+  text-transform: uppercase;
+}
+
+.about-hero__desc p {
+  margin-top: var(--space-4);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--dark);
+  opacity: 0.82;
+  max-width: 560px;
+}
+
+.about-hero__logo {
+  justify-self: center;
+  width: 500px;
+  height: 500px;
+  opacity: 0.95;
+}
+
+.about-hero__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ============ GENERIC SECTION WRAPPER ============ */
+.about-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--about-pad-x);
+}
+
+.about-section--tinted {
+  max-width: none;
+  background: var(--bg-light);
+}
+
+.about-section--tinted > .about-section__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.about-section__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: 0.02em;
+  color: var(--navy);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.about-section__title .text-accent {
+  color: var(--teal);
+}
+
+.about-section__lead {
+  max-width: 640px;
+  margin: var(--space-4) auto 0;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--dark);
+  opacity: 0.78;
+}
+
+/* ============ VISION & MISSION ============ */
+.vision-mission {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .vision-mission {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vision-mission__card {
+  background: var(--surface);
+  border: 1px solid rgba(0, 125, 99, 0.18);
+  border-radius: var(--radius);
+  padding: var(--space-8);
+}
+
+.vision-mission__card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--teal);
+  margin-bottom: var(--space-4);
+}
+
+.vision-mission__card p {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--dark);
+  opacity: 0.85;
+}
+
+.vision-mission__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.vision-mission__list li {
+  display: flex;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--dark);
+  opacity: 0.9;
+}
+
+.vision-mission__list span {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ NUMBERED CAPABILITY / DOCUMENT CARDS ============ */
+.numbered-grid {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 700px) {
+  .numbered-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .numbered-grid--five {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.numbered-card {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.numbered-card__num {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--teal-mid);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.numbered-card__body h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--navy);
+  margin-bottom: var(--space-2);
+}
+
+.numbered-card__body p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--dark);
+  opacity: 0.8;
+}
+
+/* ============ COMPLIANCE DOCS (bordered pill cards) ============ */
+.doc-grid {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 700px) {
+  .doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.doc-card {
+  position: relative;
+  border: 1.5px solid var(--teal);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-6);
+  background: var(--surface);
+}
+
+.doc-card__num {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--teal);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-card h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: var(--space-2);
+}
+
+.doc-card p {
+  font-size: 0.83rem;
+  line-height: 1.7;
+  color: var(--dark);
+  opacity: 0.8;
+}
+
+/* ============ LEGAL & ENVIRONMENTAL ============ */
+.legal-grid {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .legal-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.legal-list h3,
+.legal-standards h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin-bottom: var(--space-4);
+}
+
+.legal-list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.legal-list li {
+  position: relative;
+  padding-left: var(--space-6);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--dark);
+  opacity: 0.88;
+}
+
+.legal-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.legal-standards p {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--dark);
+  opacity: 0.85;
+}
+
+.legal-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.legal-highlight__box {
+  background: var(--teal);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+.legal-highlight__box h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+}
+
+.legal-highlight__box p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ============ ORDER & SUPPLY ============ */
+.order-grid {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 700px) {
+  .order-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.order-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.order-card__head {
+  background: var(--navy);
+  color: var(--white);
+  text-align: center;
+  padding: var(--space-3);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-card__body {
+  padding: var(--space-6);
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+/* ============ TARGET MARKET & BUYERS ============ */
+.market-note {
+  margin-top: var(--space-10);
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  background: var(--bg-light);
+  border-left: 4px solid var(--teal);
+  border-radius: 8px;
+  padding: var(--space-5) var(--space-6);
+}
+
+.market-note__icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.market-note h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: var(--space-1);
+}
+
+.market-note p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--dark);
+  opacity: 0.82;
+}
+
+.market-grid {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 700px) {
+  .market-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.market-card {
+  background: var(--teal-mid);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+.market-card h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+}
+
+.market-card p {
+  font-size: 0.83rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ============ HOW TO START ============ */
+.steps-grid {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  counter-reset: step;
+}
+
+@media (min-width: 700px) {
+  .steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  text-align: center;
+}
+
+.step-card__num {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-card h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  margin-bottom: var(--space-2);
+}
+
+.step-card p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--dark);
+  opacity: 0.78;
+}
+
+/* ============ PARTNERSHIP CTA (re-uses .partnership from style.css) ============ */
+.about-partnership {
+  padding-bottom: var(--space-16);
+  padding-left: var(--about-pad-x);
+  padding-right: var(--about-pad-x);
+}
+
+/* ============ PARAGRAF RATA KANAN-KIRI (JUSTIFY) ============
+   Hanya paragraf teks polos (bukan di dalam kartu/kotak berwarna)
+   yang dibuat rata kanan-kiri. Paragraf di dalam kotak (vision-mission
+   card, doc-card, legal-highlight box, market-note, market-card) sengaja
+   tidak disentuh karena kotak-kotak itu biasanya sempit/pendek, rata kiri
+   lebih enak dibaca. Caption pendek yang didesain center (step-card, lead,
+   tagline) juga tidak disentuh. */
+.about-hero__desc p,
+.numbered-card__body p,
+.legal-standards p,
+.partnership__step p,
+.site-footer__brand p {
+  text-align: justify;
+}
+
+/* ============ CTA BANNER ============ */
+.product-cta {
+  text-align: center;
+  padding: var(--section-pad-y-mobile) var(--about-pad-x);
+  background: linear-gradient(180deg, var(--bg-light) 0%, var(--teal-mid) 100%);
+}
+
+.product-cta__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--dark);
+  text-transform: uppercase;
+}
+
+.product-cta__subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--dark);
+  text-transform: uppercase;
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .product-cta {
+    padding-top: var(--section-pad-y-desktop);
+    padding-bottom: var(--section-pad-y-desktop);
+  }
+}

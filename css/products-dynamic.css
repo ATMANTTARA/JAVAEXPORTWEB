@@ -1,0 +1,212 @@
+.catalog-card--dynamic {
+  position: relative;
+}
+
+.pd-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--teal);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pd-card__empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.pd-note {
+  max-width: var(--max-width);
+  margin: var(--space-6) auto 0;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  border: 1px solid rgba(0, 125, 99, 0.25);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.pd-note p {
+  margin: 0;
+  flex: 1;
+  min-width: 220px;
+}
+
+.pd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.pd-modal.is-open {
+  display: flex;
+}
+
+.pd-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--dark);
+  font-family: var(--font-body);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .pd-modal__panel {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pd-modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pd-modal__media {
+  padding: var(--space-4);
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pd-modal__main {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--surface);
+  display: block;
+}
+
+.pd-modal__thumbs {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.pd-modal__thumb {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+}
+
+.pd-modal__thumb.is-active {
+  border-color: var(--teal);
+}
+
+.pd-modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pd-modal__info {
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pd-modal__cat {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pd-modal__title {
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+[data-theme="dark"] .pd-modal__title {
+  color: var(--dark);
+}
+
+.pd-modal__desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.pd-modal__specs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pd-modal__specs td {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+.pd-modal__specs td:first-child {
+  width: 45%;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.pd-modal__moq {
+  margin: 0;
+  font-size: 13px;
+}
+
+.pd-modal__cta {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+}
+
+.pd-clickable {
+  cursor: pointer;
+}

@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | PT. Java Essence Export</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <script src="js/guard.js"></script>
+    <script>
+      // Terapkan tema tersimpan SEBELUM CSS dimuat, supaya tidak ada
+      // "kedipan" warna terang sesaat sebelum berubah ke gelap.
+      (function () {
+        var saved = localStorage.getItem("jee-theme");
+        var theme = saved
+          ? saved
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/about.css" />
+  </head>
+  <body>
+    <!-- ============ HEADER / NAVBAR ============ -->
+    <div class="site-header site-header--plain" id="siteHeader">
+      <div class="topbar">
+        <div class="topbar__inner">
+          <span class="topbar__location">Jawa Barat, Indonesia</span>
+          <span class="topbar__phone">+62 858-7111-3657</span>
+          <div class="topbar__socials">
+            <a
+              href="https://id.linkedin.com/in/pt-java-essence-export-272635362"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+              ><svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="currentColor"
+              >
+                <path
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"
+                /></svg
+            ></a>
+            <a
+              href="mailto:info-export@javaessenceexport.com"
+              aria-label="Email"
+              title="Email"
+              ><svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="currentColor"
+              >
+                <path
+                  d="M2 5h20v14H2V5zm2 2v.01L12 13l8-5.99V7H4zm16 2.24-7.4 5.55a1 1 0 0 1-1.2 0L4 9.24V17h16V9.24z"
+                /></svg
+            ></a>
+            <a
+              href="https://wa.me/6285871113657"
+              target="_blank"
+              rel="noopener"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+              ><svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.05-1.34C8.5 21.48 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.8.81-2.94-.2-.32A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.38-5.6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"
+                /></svg
+            ></a>
+          </div>
+        </div>
+      </div>
+      <header class="navbar">
+        <div class="navbar__inner">
+          <a href="index.html" class="navbar__brand">
+            <img
+              src="img/logosmall.png"
+              alt="PT. Java Essence Export Logo"
+              class="navbar__brand-logo"
+            />
+            <span class="navbar__logo">PT. Java Essence Export</span>
+          </a>
+
+          <nav class="navbar__nav">
+            <div class="navbar__dropdown">
+              <button
+                class="navbar__dropdown-toggle"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Products
+                <svg
+                  class="navbar__dropdown-arrow"
+                  viewBox="0 0 24 24"
+                  width="12"
+                  height="12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              <div class="navbar__dropdown-menu navbar__dropdown-menu--mega">
+                <div class="dropdown-category">
+                  <span class="dropdown-category__title">
+                    Kitchenware
+                    <span class="dropdown-category__tag">Best Seller</span>
+                  </span>
+                  <a href="product-cutting-board.html">Cutting Board</a>
+                  <a href="spatula.html">Spatula</a>
+                  <a href="plate.html">Plate &amp; Bowl</a>
+                  <a href="tray.html">Tray &amp; Serving Board</a>
+                  <a
+                    href="gallery-kitchenware.html"
+                    class="dropdown-category__viewall"
+                    >Lihat Semua Kitchenware →</a
+                  >
+                </div>
+                <div class="dropdown-category">
+                  <span class="dropdown-category__title">
+                    Furniture
+                    <span class="dropdown-category__tag">Best Seller</span>
+                  </span>
+                  <a href="kursi.html">Teak Dining Chair</a>
+                  <a href="mejangopi.html">Teak Coffee Table</a>
+                  <a href="kursibar.html">Teak Bar Chair</a>
+                  <a href="lounge.html">Lounge Chair</a>
+                  <a
+                    href="gallery-furniture.html"
+                    class="dropdown-category__viewall"
+                    >Lihat Semua Furniture →</a
+                  >
+                </div>
+                <div class="dropdown-category">
+                  <span class="dropdown-category__title">
+                    Home Decor
+                    <span class="dropdown-category__tag">Best Seller</span>
+                  </span>
+                  <a href="teakwallpanel.html">Teak Wall Panel</a>
+                  <a href="teakmirrors.html">Teak Mirrors</a>
+                  <a href="teakwallclock.html">Teak Wall Clock</a>
+                  <a href="partition.html">Teak Wood Partition</a>
+                  <a
+                    href="gallery-homedecor.html"
+                    class="dropdown-category__viewall"
+                    >Lihat Semua Home Decor →</a
+                  >
+                </div>
+              </div>
+            </div>
+            <a href="about.html" class="is-active">About Us</a>
+            <a href="contact.html">Contact Us</a>
+          </nav>
+
+          <div class="navbar__right">
+            <a href="index.html" class="btn btn--dark">HOME</a>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle dark/light theme"
+            >
+              <svg
+                class="icon-moon"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              <svg
+                class="icon-sun"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                />
+              </svg>
+            </button>
+            <button
+              class="navbar__toggle"
+              id="navToggle"
+              aria-label="Open menu"
+            >
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <!-- ============ ABOUT HERO ============ -->
+    <section class="about-hero">
+      <div class="about-hero__intro">
+        <span class="about-hero__eyebrow">About Us</span>
+        <h1 class="about-hero__title">
+          Your Trusted OEM &amp;<br />
+          Private Label Partner
+        </h1>
+        <p class="about-hero__tagline">In Teak Wood Products</p>
+        <div class="about-hero__desc">
+          <p>
+            PT Java Essence Export is a trusted Indonesia-based export company
+            specializing in premium teak wood furniture and kitchenware for
+            global markets.
+          </p>
+          <p>
+            We serve importers, distributors, and brand owners by delivering
+            high-quality products with consistent supply, competitive pricing,
+            and full export compliance.
+          </p>
+          <p>
+            Our strength lies in strong manufacturing partnerships, strict
+            quality control, and the ability to support OEM and private label
+            production tailored to your brand.
+          </p>
+        </div>
+      </div>
+      <div class="about-hero__logo">
+        <img src="img/abo.jpg" alt="PT. Java Essence Export Logo" />
+      </div>
+    </section>
+
+    <!-- ============ VISION & MISSION ============ -->
+    <section class="about-section">
+      <h2 class="about-section__title">
+        OUR <span class="text-accent">VISION &amp; MISSION</span>
+      </h2>
+
+      <div class="vision-mission">
+        <div class="vision-mission__card">
+          <h3>Our Vision</h3>
+          <p>
+            To become a globally trusted partner in providing premium Indonesian
+            teak kitchen equipment and furniture, known for its superior
+            quality, classy design, and ability to deliver high-value brand
+            solutions to clients.
+          </p>
+        </div>
+        <div class="vision-mission__card">
+          <h3>Our Mission</h3>
+          <ul class="vision-mission__list">
+            <li>
+              <span>1</span>Deliver consistent, high-quality products at
+              competitive prices
+            </li>
+            <li>
+              <span>2</span>Provide OEM and private label solutions for brand
+              growth
+            </li>
+            <li>
+              <span>3</span>Ensure full compliance and reliable export
+              documentation
+            </li>
+            <li>
+              <span>4</span>Build long-term partnerships with global clients
+            </li>
+            <li><span>5</span>Promote sustainable and ethical sourcing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRODUCTION CAPABILITIES & QUALITY STANDARDS ============ -->
+    <section class="about-section about-section--tinted">
+      <div class="about-section__inner">
+        <h2 class="about-section__title">
+          PRODUCTION CAPABILITIES &amp;<br /><span class="text-accent"
+            >QUALITY STANDARDS</span
+          >
+        </h2>
+
+        <div class="numbered-grid numbered-grid--five">
+          <div class="numbered-card">
+            <div class="numbered-card__num">01</div>
+            <div class="numbered-card__body">
+              <h4>Production Capacity</h4>
+              <p>
+                Flexible manufacturing network with aggregate capacity based on
+                order requirements. Lead time: 30–45 days standard (based on
+                qty).
+              </p>
+            </div>
+          </div>
+          <div class="numbered-card">
+            <div class="numbered-card__num">02</div>
+            <div class="numbered-card__body">
+              <h4>Minimum Order Quantities</h4>
+              <p>
+                Container-load orders preferred (20ft or 40ft containers).
+                Smaller trial orders accommodated with flexible MOQ discussion
+                based on product category.
+              </p>
+            </div>
+          </div>
+          <div class="numbered-card">
+            <div class="numbered-card__num">03</div>
+            <div class="numbered-card__body">
+              <h4>Customization Option</h4>
+              <p>
+                Size modifications, design alterations, finish variations, and
+                custom packaging. Technical drawings reviewed within 3–5
+                business days. Free sample shipments available for quality
+                evaluation.
+              </p>
+            </div>
+          </div>
+          <div class="numbered-card">
+            <div class="numbered-card__num">04</div>
+            <div class="numbered-card__body">
+              <h4>Export-Grade Packaging</h4>
+              <p>
+                Wooden crates or cardboard with foam/straw filling. Corner
+                protectors for furniture, individual wrapping for kitchenware,
+                palletized and secured for sea or air freight.
+              </p>
+            </div>
+          </div>
+          <div class="numbered-card">
+            <div class="numbered-card__num">05</div>
+            <div class="numbered-card__body">
+              <h4>Quality Assurance Process</h4>
+              <p>
+                Raw material inspection, in-process checks, final product
+                verification, and pre-shipment review, complete with defect
+                reports and corrective actions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPORT DOCUMENTATION & COMPLIANCE ============ -->
+    <section class="about-section">
+      <h2 class="about-section__title">
+        EXPORT DOCUMENTATION &amp;<br /><span class="text-accent"
+          >COMPLIANCE</span
+        >
+      </h2>
+
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-card__num">1</div>
+          <h4>Commercial Invoice</h4>
+          <p>
+            Itemized pricing, quantities, and payment terms formatted to
+            destination country requirements, including Harmonized System codes
+            for classification.
+          </p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card__num">2</div>
+          <h4>Packing List</h4>
+          <p>
+            Detailed container contents, package dimensions, weights, and
+            marking specifications — essential for warehouse handling and
+            inventory management.
+          </p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card__num">3</div>
+          <h4>Certificate of Origin</h4>
+          <p>
+            Indonesian Chamber of Commerce documentation verifying product
+            origin, required for preferential tariff treatment under trade
+            agreements.
+          </p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card__num">4</div>
+          <h4>Bill of Lading</h4>
+          <p>
+            Title document for goods transfer. Negotiable or straight B/L
+            options available based on payment terms and customer requirements.
+          </p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card__num">5</div>
+          <h4>Wood Legality Certificate</h4>
+          <p>
+            SVLK (Sistem Verifikasi Legalitas Kayu) documentation or equivalent
+            forestry compliance certificates, proving legal harvesting and
+            processing.
+          </p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card__num">6</div>
+          <h4>Phytosanitary Certificate</h4>
+          <p>
+            Plant health inspection approval when required by the destination
+            country, confirming absence of pests and compliance with
+            agricultural regulations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEGAL & ENVIRONMENTAL COMPLIANCE ============ -->
+    <section class="about-section about-section--tinted">
+      <div class="about-section__inner">
+        <h2 class="about-section__title">
+          LEGAL &amp; <span class="text-accent">ENVIRONMENTAL COMPLIANCE</span>
+        </h2>
+
+        <div class="legal-grid">
+          <div>
+            <div class="legal-list">
+              <h3>Required Documentation</h3>
+              <ul>
+                <li>Company business license (AKTA/NIB/NPWP)</li>
+                <li>Export permit (API-U)</li>
+                <li>SVLK legality certificates for wood products</li>
+                <li>Food-grade finish certifications when applicable</li>
+                <li>Material safety documentation</li>
+                <li>Fumigation certificates</li>
+              </ul>
+            </div>
+            <div class="legal-standards">
+              <h3>Compliance Standards</h3>
+              <p>
+                All products meet relevant safety and environmental regulations
+                for target markets. We provide documentation supporting
+                compliance with Japanese JAS, European EUTR, and American Lacey
+                Act requirements.
+              </p>
+            </div>
+          </div>
+
+          <div class="legal-highlight">
+            <div class="legal-highlight__box">
+              <h4>Food-Grade Finishes</h4>
+              <p>
+                Kitchenware items utilize non-toxic, food-safe finishes
+                compliant with FDA or EU food contact material regulations.
+                Natural teak oils or certified food-grade varnishes are applied.
+              </p>
+            </div>
+            <div class="legal-highlight__box">
+              <h4>Sustainable Practices</h4>
+              <p>
+                Partner manufacturers follow responsible forestry practices,
+                with documentation available demonstrating legal wood sourcing
+                and environmental management systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ORDER AND SUPPLY ============ -->
+    <section class="about-section">
+      <h2 class="about-section__title">
+        ORDER AND <span class="text-accent">SUPPLY</span>
+      </h2>
+
+      <div class="order-grid">
+        <div class="order-card">
+          <div class="order-card__head">MOQ</div>
+          <div class="order-card__body">
+            Container-based / Negotiable for trial
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-card__head">Lead Time</div>
+          <div class="order-card__body">
+            Kitchenware: 2–4 weeks (based on qty)<br />
+            Furniture: 4–8 weeks (based on qty)
+          </div>
+        </div>
+        <div class="order-card">
+          <div class="order-card__head">Shipping Terms</div>
+          <div class="order-card__body">FOB / CIF</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TARGET MARKET & BUYERS ============ -->
+    <section class="about-section about-section--tinted">
+      <div class="about-section__inner">
+        <h2 class="about-section__title">
+          TARGET MARKET &amp; <span class="text-accent">BUYERS</span>
+        </h2>
+        <p class="about-section__lead">
+          PT. Java Essence Export serves importers, distributors, and retail
+          brands seeking reliable wooden product suppliers for various business
+          models.
+        </p>
+
+        <div class="market-note">
+          <div class="market-note__icon">!</div>
+          <div>
+            <h4>Market Experience</h4>
+            <p>
+              Proven shipments to Japan (retail kitchenware), Europe (furniture
+              wholesale), and North America (home decor distribution). Familiar
+              with market-specific requirements and preferences.
+            </p>
+          </div>
+        </div>
+
+        <div class="market-grid">
+          <div class="market-card">
+            <h4>Importers &amp; Distributors</h4>
+            <p>
+              Companies importing container loads for wholesale distribution. We
+              support bulk orders with container consolidation and destination
+              port delivery coordination.
+            </p>
+          </div>
+          <div class="market-card">
+            <h4>Retail Brands</h4>
+            <p>
+              Department stores, home goods retailers, and specialty shops
+              requiring consistent product supply. Private label options
+              available for branded merchandise programs.
+            </p>
+          </div>
+          <div class="market-card">
+            <h4>Wholesale Buyers</h4>
+            <p>
+              Volume purchasers seeking competitive pricing for resale, with
+              flexible order quantities and pricing tiers based on volume
+              commitments.
+            </p>
+          </div>
+          <div class="market-card">
+            <h4>Private Label Partners</h4>
+            <p>
+              Companies requiring OEM manufacturing for their brands. We
+              accommodate custom designs, packaging, and specifications with
+              confidentiality agreements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO START ============ -->
+    <section class="about-section">
+      <h2 class="about-section__title">
+        HOW TO <span class="text-accent">START</span>
+      </h2>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-card__num">1</div>
+          <h4>Send Inquiry</h4>
+          <p>Reach out to us with your product interest and requirements.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-card__num">2</div>
+          <h4>Receive Quotation</h4>
+          <p>Get a transparent, custom quote based on your order details.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-card__num">3</div>
+          <h4>Confirm Specification</h4>
+          <p>
+            Confirm product specifications with a free sample shipment for
+            quality evaluation.
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-card__num">4</div>
+          <h4>Production &amp; Shipment</h4>
+          <p>We handle production, quality control, and export shipping.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LET'S BUILD A PARTNERSHIP ============ -->
+    <section class="partnership about-partnership" id="partnership">
+      <h2 class="section-title section-title--center">
+        LET'S BUILD A PARTNERSHIP
+      </h2>
+
+      <div class="partnership__grid">
+        <div class="partnership__step">
+          <h3>Request Product Catalog</h3>
+          <p>
+            Comprehensive product listings with specifications, pricing, and
+            available customization options. Updated quarterly with new designs.
+          </p>
+        </div>
+        <div class="partnership__step">
+          <h3>Obtain Quotation</h3>
+          <p>
+            Custom quotes based on your order quantities, specifications, and
+            destination. Transparent pricing with no hidden charges.
+          </p>
+        </div>
+        <div class="partnership__step">
+          <h3>Review Sample</h3>
+          <p>
+            Free sample shipments available for quality evaluation. We cover
+            shipping costs with credit toward initial orders.
+          </p>
+        </div>
+      </div>
+
+      <div class="partnership__banner">
+        We are not just a supplier — we are your long-term partner in building a
+        scalable and competitive product line in the global market.
+      </div>
+    </section>
+
+    <!-- ============ CTA BANNER ============ -->
+    <section class="product-cta" id="contact">
+      <h2 class="product-cta__title">YOUR TRUSTED OEM &amp; PRIVATE LABEL</h2>
+      <p class="product-cta__subtitle">PARTNER IN TEAK WOOD PRODUCTS</p>
+      <a href="contact.html" class="btn btn--dark">Start Partnership</a>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <img src="img/logosmall.png" alt="PT. Java Essence Export Logo" />
+          <h3>CRAFTED BY NATURE,<br />TRUSTED WORLDWIDE</h3>
+          <p>
+            Your trusted OEM and private label partner for sourcing premium
+            Indonesian teak wood products and delivering them to international
+            markets with professionalism.
+          </p>
+        </div>
+        <div class="site-footer__contact">
+          <h4>CONTACT INFORMATION</h4>
+          <a
+            class="site-footer__contact-row"
+            href="mailto:info-export@javaessenceexport.com"
+          >
+            <span>Email</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M2 5h20v14H2V5zm2 2v.01L12 13l8-5.99V7H4zm16 2.24-7.4 5.55a1 1 0 0 1-1.2 0L4 9.24V17h16V9.24z"
+              />
+            </svg>
+            <span>info-export@javaessenceexport.com</span>
+          </a>
+          <div class="site-footer__contact-row">
+            <span>Office</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+              />
+            </svg>
+            <span>West Java, Indonesia</span>
+          </div>
+          <a
+            class="site-footer__contact-row"
+            href="https://www.javaessenceexport.com"
+            target="_blank"
+            rel="noopener"
+          >
+            <span>Website</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 8H15.6a15.6 15.6 0 0 0-1.2-5.15A8.03 8.03 0 0 1 18.9 10zM12 4.1c.9 1.3 1.6 3.2 1.85 5.9h-3.7c.25-2.7.95-4.6 1.85-5.9zM4.26 14a8.1 8.1 0 0 1 0-4h3.5a17.8 17.8 0 0 0 0 4h-3.5zM5.1 16h3.06a15.6 15.6 0 0 0 1.2 4.15A8.03 8.03 0 0 1 5.1 16zm3.06-8H5.1a8.03 8.03 0 0 1 4.26-4.15A15.6 15.6 0 0 0 8.16 8zM12 19.9c-.9-1.3-1.6-3.2-1.85-5.9h3.7c-.25 2.7-.95 4.6-1.85 5.9zM10.15 12a15.9 15.9 0 0 1 0-4h3.7a15.9 15.9 0 0 1 0 4h-3.7zm4.25 8.15c.55-1.2.98-2.6 1.2-4.15h3.3a8.03 8.03 0 0 1-4.5 4.15zM15.75 14a17.8 17.8 0 0 0 0-4h3.5a8.1 8.1 0 0 1 0 4h-3.5z"
+              />
+            </svg>
+            <span>www.javaessenceexport.com</span>
+          </a>
+          <a
+            class="site-footer__contact-row"
+            href="https://wa.me/6285871113657"
+            target="_blank"
+            rel="noopener"
+          >
+            <span>WhatsApp</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.05-1.34C8.5 21.48 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.18l-.32-.19-3.02.8.81-2.94-.2-.32A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.38-5.6c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"
+              />
+            </svg>
+            <span>+62 858-7111-3657</span>
+          </a>
+          <a class="site-footer__contact-row" href="#">
+            <span>LinkedIn</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"
+              />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a class="site-footer__contact-row" href="#">
+            <span>Telegram</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M21.9 4.6 2.7 12c-.9.35-.9 1.63.02 1.95l4.7 1.6 1.8 5.55c.28.86 1.38 1.1 2 .44l2.53-2.68 4.7 3.46c.78.58 1.9.15 2.1-.8l3.14-14.9c.2-.98-.75-1.8-1.79-1.42zM8.9 14.98l8.4-7.6c.2-.18-.03-.48-.26-.33l-9.9 6.4-.24 3.5-.06-.02z"
+              />
+            </svg>
+            <span>Telegram</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script type="module" src="js/auth.js"></script>
+  </body>
+</html>

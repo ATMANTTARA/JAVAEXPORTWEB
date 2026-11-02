@@ -1,0 +1,1153 @@
+/* ===========================================================
+   PT. JAVA ESSENCE EXPORT — Landing Page
+   Palette diambil dari desain Figma:
+   - Teal utama   : #007D63
+   - Teal gelap   : #0B4A3C
+   - Navy teks    : #16324F
+   - Gelap netral : #2B2B2B
+   - Abu terang   : #EDEDED
+=========================================================== */
+
+/* ===========================================================
+   TRANSISI ANTAR HALAMAN (View Transitions API)
+   Browser yang belum mendukung akan otomatis mengabaikan ini,
+   jadi tetap aman/tidak error di browser mana pun.
+=========================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.32s;
+  animation-timing-function: ease;
+}
+
+:root {
+  --teal: #007d63;
+  --teal-dark: #0b4a3c;
+  --teal-light: #a9cfc0;
+  --teal-mid: #389683;
+  --navy: #16324f;
+  --navy-btn: #3b4a50;
+  --dark: #2b2b2b;
+  --dark-soft: #35342f;
+  --bg-light: #eeeeec;
+  --white: #ffffff;
+  --surface: #ffffff; /* warna "kartu" (dropdown, menu mobile, tabel) — beda
+                          dari --white supaya teks putih di tombol tidak ikut
+                          kebawa saat --surface berubah gelap di dark mode */
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Poppins", sans-serif;
+  --radius: 16px;
+  --max-width: 1200px;
+
+  /* ============ SPACING SCALE (basis 8px) ============
+     Dipakai untuk SEMUA margin/padding/gap di file ini
+     supaya jaraknya konsisten di seluruh halaman. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+
+  /* Jarak baku yang sering dipakai berulang */
+  --section-pad-y-mobile: var(
+    --space-16
+  ); /* 64px  atas-bawah section, mobile  */
+  --section-pad-y-desktop: var(
+    --space-24
+  ); /* 96px  atas-bawah section, desktop */
+  --section-pad-x: var(--space-6); /* 24px  kiri-kanan section          */
+
+  /* Tinggi site-header (topbar + navbar) yang bersifat `fixed`.
+     Dipakai untuk kompensasi padding-top / scroll-margin-top di section
+     manapun yang muncul tepat di bawah header, supaya tidak ketutup/dempet. */
+  --header-h-mobile: 64px; /* navbar saja, topbar disembunyikan di mobile */
+  --header-h-desktop: 96px; /* topbar + navbar di layar >=768px */
+}
+
+/* ===========================================================
+   DARK MODE
+   Diaktifkan dengan menambahkan atribut data-theme="dark" ke
+   elemen <html>. Karena semua warna di file ini sudah pakai
+   custom property (var(--xxx)), cukup override nilainya di sini
+   dan seluruh halaman otomatis ikut berubah — tidak perlu tulis
+   ulang style tiap komponen satu-satu.
+=========================================================== */
+[data-theme="dark"] {
+  --dark: #eaeaea; /* teks utama jadi terang */
+  --dark-soft: #1c1c1c; /* dulu utk kartu/tombol gelap, tetap gelap */
+  --bg-light: #121212; /* background halaman jadi gelap */
+  --surface: #1e1e1e; /* kartu/dropdown/menu jadi gelap */
+  /* --navy dan --white SENGAJA TIDAK di-override:
+     --navy dipakai utk navbar & teks hero, harus tetap warna biru-abu
+     yang sama di kedua tema (baru berubah saat header discroll, diatur
+     terpisah di bawah). --white dipakai utk teks putih di tombol (HOME,
+     CONTACT US, dll), harus tetap putih di kedua tema. */
+}
+
+[data-theme="dark"] body {
+  background: var(--bg-light);
+}
+
+/* Beberapa tempat pakai rgba(255,255,255,...) langsung (bukan var),
+   jadi perlu override manual supaya tidak putih terang di atas dark bg */
+[data-theme="dark"] .site-header.is-scrolled .navbar {
+  background: rgba(18, 18, 18, 0.97);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .navbar__dropdown-menu {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .navbar__dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .navbar__nav.is-open {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .navbar__nav.is-open > a,
+[data-theme="dark"] .navbar__nav.is-open .navbar__dropdown-toggle {
+  color: #f0f0f0;
+}
+
+/* Navbar saat SUDAH discroll di dark mode: background jadi hampir hitam,
+   jadi teks navy yang biasanya dipakai perlu diganti terang di sini saja
+   (saat belum discroll, teks tetap warna navy konstan seperti biasa). */
+[data-theme="dark"] .site-header.is-scrolled .navbar__logo,
+[data-theme="dark"] .site-header.is-scrolled .navbar__nav > a,
+[data-theme="dark"] .site-header.is-scrolled .navbar__dropdown-toggle {
+  color: #f0f0f0;
+}
+
+/* ============ TOMBOL TOGGLE TEMA ============ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--dark);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Supaya section/elemen dengan id (target anchor link seperti #contact)
+   tidak ketutup site-header yang fixed saat halaman discroll ke situ. */
+section[id],
+[id] {
+  scroll-margin-top: var(--header-h-mobile);
+}
+
+@media (min-width: 768px) {
+  section[id],
+  [id] {
+    scroll-margin-top: var(--header-h-desktop);
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: 0.03em;
+  color: var(--dark);
+  text-align: center;
+  text-transform: uppercase;
+}
+.section-title--left {
+  text-align: left;
+}
+.section-title--center {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.text-accent {
+  color: var(--teal);
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-6);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  border: none;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+.btn--dark {
+  background: var(--dark-soft);
+  color: var(--white);
+}
+.btn--navy {
+  background: var(--navy-btn);
+  color: var(--white);
+}
+
+/* ===========================================================
+   SITE HEADER WRAPPER (topbar + navbar) — transparent at top,
+   solid once the page is scrolled
+=========================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================================================
+   TOP UTILITY BAR (location, phone, socials)
+=========================================================== */
+.topbar {
+  background: transparent;
+  color: var(--dark);
+  font-size: 0.7rem;
+  display: none;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.topbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.topbar__socials {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.topbar__socials a {
+  color: var(--dark);
+  display: flex;
+  transition: color 0.3s ease;
+}
+
+.topbar__socials a:hover {
+  color: var(--teal);
+}
+
+@media (min-width: 768px) {
+  .topbar {
+    display: block;
+  }
+}
+
+/* Scrolled state: header becomes solid */
+.site-header.is-scrolled .topbar {
+  background: var(--dark-soft);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.site-header.is-scrolled .topbar__socials a {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy-btn);
+  color: var(--white);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .navbar__avatar {
+    display: flex;
+  }
+}
+
+/* ===========================================================
+   NAVBAR
+=========================================================== */
+.navbar {
+  position: relative;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled .navbar {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.navbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.navbar__brand-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.navbar__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+.navbar__nav {
+  display: none;
+  gap: var(--space-8);
+  font-size: 0.85rem;
+  font-weight: 500;
+  align-items: center;
+}
+
+.navbar__nav > a {
+  color: var(--navy);
+}
+
+.navbar__dropdown {
+  position: relative;
+}
+
+.navbar__dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy);
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar__dropdown-arrow {
+  transition: transform 0.2s ease;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-arrow,
+.navbar__dropdown.is-open .navbar__dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.navbar__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding: var(--space-6);
+  min-width: 220px;
+  z-index: 50;
+}
+
+/* Mega menu: 3 kolom kategori (Kitchenware / Furniture / Home Decor) */
+.navbar__dropdown-menu--mega {
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: var(--space-8);
+  min-width: 620px;
+}
+
+.dropdown-category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dropdown-category__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  padding: var(--space-2) var(--space-4) var(--space-3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--space-2);
+}
+
+.dropdown-category__tag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.6rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--white);
+  background: var(--teal);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.dropdown-category__empty {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.78rem;
+  color: var(--dark);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.navbar__dropdown-menu a {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--dark);
+  white-space: nowrap;
+}
+
+.navbar__dropdown-menu a:hover {
+  background: var(--bg-light);
+  color: var(--teal);
+}
+
+.dropdown-category__viewall {
+  margin-top: var(--space-2);
+  padding-top: var(--space-3) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.76rem !important;
+  font-weight: 600;
+  color: var(--teal) !important;
+}
+
+.dropdown-category__viewall:hover {
+  background: transparent !important;
+  opacity: 0.7;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu,
+.navbar__dropdown.is-open .navbar__dropdown-menu {
+  display: flex;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu--mega,
+.navbar__dropdown.is-open .navbar__dropdown-menu--mega {
+  display: grid;
+}
+
+@media (max-width: 767px) {
+  .navbar__dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    padding: var(--space-1) 0 var(--space-1) var(--space-4);
+    min-width: auto;
+    margin-top: 6px;
+  }
+
+  /* Mega menu di mobile: 3 kolom jadi terlalu sempit, jadi ditumpuk 1 kolom */
+  .navbar__dropdown-menu--mega {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    min-width: auto;
+  }
+
+  .dropdown-category__title {
+    padding-left: 0;
+  }
+
+  .navbar__dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar__right .btn {
+  padding: var(--space-2) var(--space-5);
+  font-size: 0.7rem;
+}
+
+.navbar__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 28px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.navbar__toggle span {
+  display: block;
+  height: 2px;
+  background: var(--dark);
+  border-radius: 2px;
+}
+
+/* ===========================================================
+   TOPBAR TRANSPARAN (belum discroll) — teks SELALU PUTIH
+   Baris utility teratas (lokasi, telepon, sosmed) melayang di atas
+   foto/video hero, bukan di atas warna latar halaman. Karena itu
+   warnanya sengaja putih tetap (tidak ikut var(--dark) yang berubah
+   ikut tema), supaya tidak berisiko menyatu dengan foto hero yang
+   terang. Begitu header solid (.is-scrolled), warna topbar sudah
+   diatur terang di atas dengan background gelap — otomatis kontras.
+=========================================================== */
+.site-header:not(.is-scrolled) .topbar,
+.site-header:not(.is-scrolled) .topbar__socials a {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.site-header:not(.is-scrolled) .topbar__socials a:hover {
+  color: var(--teal-light);
+}
+
+.site-header:not(.is-scrolled) .navbar__toggle span {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Mobile dropdown nav */
+.navbar__nav.is-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  padding: var(--space-4) var(--space-5);
+  gap: var(--space-4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================================================
+   HEADER DI HALAMAN TANPA FOTO/VIDEO HERO (mis. contact.html)
+   Aturan "teks selalu putih/navy tetap" di atas mengasumsikan
+   header melayang di atas foto/video hero yang gelap. Di halaman
+   seperti contact.html, tidak ada foto di belakangnya — cuma warna
+   latar biasa (var(--bg-light)) yang berubah ikut tema. Jadi di
+   sini teksnya justru HARUS ikut tema (var(--dark)), sama seperti
+   teks body lainnya, supaya tetap kontras di kedua mode.
+=========================================================== */
+.site-header--plain:not(.is-scrolled) .topbar,
+.site-header--plain:not(.is-scrolled) .topbar__socials a,
+.site-header--plain:not(.is-scrolled) .navbar__logo,
+.site-header--plain:not(.is-scrolled) .navbar__nav > a,
+.site-header--plain:not(.is-scrolled) .navbar__dropdown-toggle {
+  color: var(--dark);
+  text-shadow: none;
+}
+
+.site-header--plain:not(.is-scrolled) .topbar__socials a:hover {
+  color: var(--teal);
+}
+
+.site-header--plain:not(.is-scrolled) .navbar__toggle span {
+  background: var(--dark);
+  box-shadow: none;
+}
+
+/* ===========================================================
+   HERO (video background)
+=========================================================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  padding: var(--space-28) var(--section-pad-x) var(--space-10);
+}
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    160deg,
+    rgba(11, 74, 60, 0.82) 0%,
+    rgba(0, 125, 99, 0.55) 45%,
+    rgba(169, 207, 192, 0.55) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.hero__logo {
+  width: 130px;
+  height: 130px;
+  opacity: 0.95;
+}
+.hero__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .hero__logo {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.2;
+  color: var(--navy);
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.25);
+}
+
+.hero__subtitle {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--navy);
+  max-width: 480px;
+}
+
+/* ===========================================================
+   WHY CHOOSE US
+=========================================================== */
+.why-choose {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-pad-y-mobile) var(--section-pad-x);
+}
+
+.why-choose__subtitle {
+  margin: var(--space-3) auto 0;
+  max-width: 640px;
+  color: var(--dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.why-choose__grid {
+  margin-top: var(--space-12);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.why-choose__box {
+  background: var(--teal);
+  border-radius: var(--radius);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--white);
+}
+
+.why-choose__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-choose__icon svg {
+  color: var(--white);
+  width: 20px;
+  height: 20px;
+}
+
+.why-choose__text {
+  flex: 1;
+  min-height: 1.2em;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+/* ===========================================================
+   PRODUCT CATEGORIES
+=========================================================== */
+.products {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-10) var(--section-pad-x) var(--section-pad-y-mobile);
+}
+
+.products__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  align-items: flex-start;
+  margin-bottom: var(--space-8);
+}
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.product-card {
+  display: block;
+  background: var(--dark-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--white);
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.product-card__image {
+  aspect-ratio: 4 / 3;
+  background: #4a4640;
+  overflow: hidden;
+}
+
+.product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-card__image img {
+  transform: scale(1.06);
+}
+
+.product-card__body {
+  padding: var(--space-4);
+}
+
+.product-card__label {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--teal-light);
+  margin-bottom: var(--space-2);
+}
+
+.product-card__desc {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===========================================================
+   PARTNERSHIP
+=========================================================== */
+.partnership {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-pad-y-mobile) var(--section-pad-x) 0;
+}
+
+.partnership__grid {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.partnership__step h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: var(--dark);
+}
+
+.partnership__step p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--dark);
+  opacity: 0.75;
+}
+
+.partnership__banner {
+  margin-top: var(--space-12);
+  background: var(--teal);
+  color: var(--white);
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  padding: var(--space-6) var(--space-5);
+}
+
+/* ===========================================================
+   CONTACT / FOOTER BAR
+=========================================================== */
+.contact-bar {
+  background: var(--dark-soft);
+  color: var(--white);
+  padding: var(--space-6);
+}
+
+.contact-bar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.contact-bar__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--teal-light);
+}
+
+.contact-bar__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contact-bar__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: #e8b84b;
+}
+
+/* ===========================================================
+   RESPONSIVE — TABLET & DESKTOP
+=========================================================== */
+@media (min-width: 768px) {
+  .navbar__nav {
+    display: flex;
+  }
+  .navbar__toggle {
+    display: none;
+  }
+
+  .why-choose__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .partnership__grid {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+  }
+
+  .partnership__banner {
+    font-size: 0.95rem;
+  }
+
+  .contact-bar__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .contact-bar__info {
+    flex-direction: row;
+    gap: var(--space-8);
+  }
+
+  .contact-bar__item {
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: 60px;
+  }
+
+  /* Section besar pakai jarak lebih lega di desktop, tetap ikut skala 8px */
+  .why-choose,
+  .partnership {
+    padding-top: var(--section-pad-y-desktop);
+  }
+  .products {
+    padding-top: var(--space-12);
+    padding-bottom: var(--section-pad-y-desktop);
+  }
+}
+
+/* ===========================================================
+   REVEAL SAAT DI-SCROLL
+   Class `.reveal` ditambahkan otomatis lewat script.js ke elemen-
+   elemen konten utama, lalu `.is-visible` ditambahkan saat elemen
+   itu mulai kelihatan di layar.
+=========================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn:hover {
+    transform: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ===========================================================
+   FOOTER
+   Dipindahkan ke sini (dari yang sebelumnya cuma ada di
+   product.css/lounge.css/dst) supaya halaman yang TIDAK memuat
+   CSS produk — misalnya contact.html — tetap dapat style footer
+   yang benar. Kalau file CSS produk juga masih punya blok yang
+   sama, tidak masalah (aturannya identik, tidak bentrok).
+=========================================================== */
+.site-footer {
+  background: var(--teal-mid);
+  color: var(--white);
+  padding: var(--section-pad-y-mobile) var(--section-pad-x) var(--space-8);
+}
+
+.site-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+.site-footer__brand img {
+  width: 46px;
+  height: 46px;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer__brand h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-2);
+}
+
+.site-footer__brand p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 320px;
+}
+
+.site-footer__socials {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.site-footer__social-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.78rem;
+  color: var(--white);
+}
+
+.site-footer__contact h4 {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+/* Wadah 2 kolom (3 kontak kiri, 3 kontak kanan) supaya blok kontak tidak
+   memanjang ke bawah sendirian & seimbang dengan kolom brand di sebelahnya */
+.site-footer__contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2) var(--space-6);
+}
+
+@media (min-width: 480px) {
+  .site-footer__contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.site-footer__contact-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer__contact-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.78rem;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer__contact-row > span:first-child {
+  display: none; /* label tersembunyi, hanya untuk aksesibilitas struktur */
+}
+
+@media (min-width: 768px) {
+  .site-footer__inner {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}

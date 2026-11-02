@@ -1,0 +1,415 @@
+/* ===========================================================
+   PRODUCT DETAIL PAGE — Cutting Board Premium Series
+   Menggunakan variabel warna dari style.css (:root)
+=========================================================== */
+
+/* ============ PRODUCT HERO ============ */
+.product-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.product-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(238, 238, 236, 0.55) 0%,
+    rgba(120, 150, 135, 0.35) 55%,
+    rgba(90, 130, 115, 0.25) 100%
+  );
+}
+
+.product-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-28) var(--space-6) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  text-align: left;
+}
+
+.product-hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  color: var(--navy);
+}
+
+@media (min-width: 768px) {
+  .product-hero__content {
+    align-items: flex-end;
+    text-align: right;
+    padding: var(--space-20) var(--space-16);
+  }
+}
+
+/* ============ PRODUCT OVERVIEW ============ */
+/* Section ini muncul tepat di bawah site-header yang `fixed`, jadi
+   padding-top dihitung dari tinggi header + jarak napas tambahan,
+   bukan cuma dari --section-pad-y-* biasa (supaya tidak dempet). */
+.product-overview {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--header-h-mobile) + var(--space-8)) var(--section-pad-x)
+    var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .product-overview {
+    padding-top: calc(var(--header-h-desktop) + var(--space-10));
+  }
+}
+
+.product-overview__text {
+  margin-top: var(--space-5);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+  max-width: 760px;
+  text-align: justify;
+  text-align-last: left;
+}
+
+/* ============ SIZE TABLE ============ */
+.size-table-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-8) var(--section-pad-x) 0;
+}
+
+.size-table {
+  margin-top: var(--space-10);
+  border: 1px solid #d8d8d6;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.size-table__title {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  padding: var(--space-4);
+  border-bottom: 1px solid #d8d8d6;
+}
+
+.size-table table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.size-table th,
+.size-table td {
+  padding: var(--space-4) var(--space-3);
+  text-align: center;
+  border: 1px solid #e2e2e0;
+}
+
+.size-table thead th {
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.size-table tbody td:first-child {
+  width: 45%;
+  font-weight: 600;
+  text-align: left;
+  padding-left: var(--space-5);
+}
+
+.size-table tbody td:last-child {
+  width: 55%;
+}
+
+.size-table tbody tr:nth-child(even) {
+  background: rgba(56, 150, 131, 0.05);
+}
+
+/* Modifier: pakai class ini kalau ingin SEMUA kolom (termasuk label) rata tengah */
+.size-table--center tbody td:first-child {
+  text-align: center;
+  padding-left: var(--space-3);
+}
+
+.size-table {
+  overflow-x: auto;
+}
+
+/* ============ INFO BLOCKS (Specification / MOQ / Packaging / Use Case) ============ */
+.info-block {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+/* Jarak antar section info-block yang beruntun (Specification, MOQ,
+   Packaging, Use Case) supaya tidak terasa dempet satu sama lain */
+.info-block + .info-block {
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .info-block + .info-block {
+    margin-top: var(--space-8);
+  }
+}
+
+.info-block__image {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.info-block__image--small {
+  min-height: 90px;
+}
+
+.info-block__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.info-block__label {
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  color: var(--teal-mid);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.info-block__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.info-pill {
+  background: var(--teal-mid);
+  color: var(--white);
+  border-radius: 10px;
+  padding: var(--space-4) var(--space-5);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.info-pill strong {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+@media (min-width: 768px) {
+  .info-block {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-6);
+  }
+  .info-block--compact {
+    grid-template-columns: 1fr 2fr;
+    align-items: stretch;
+  }
+  .info-block--compact .info-block__image {
+    min-height: unset;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-overview {
+    /* padding-top sudah diatur khusus di atas (kompensasi header fixed) */
+    padding-bottom: var(--section-pad-y-desktop);
+  }
+  .product-gallery,
+  .product-cta {
+    padding-top: var(--section-pad-y-desktop);
+    padding-bottom: var(--section-pad-y-desktop);
+  }
+  .site-footer {
+    padding-top: var(--section-pad-y-desktop);
+  }
+}
+
+/* ============ PRODUCT GALLERY ============ */
+.product-gallery {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--section-pad-y-mobile) var(--section-pad-x);
+}
+
+.product-gallery__grid {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.product-gallery__item {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--dark-soft);
+}
+
+.product-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-gallery__item--empty {
+  background: var(--dark-soft);
+}
+
+/* ============ CTA BANNER ============ */
+.product-cta {
+  text-align: center;
+  padding: var(--section-pad-y-mobile) var(--section-pad-x);
+  background: linear-gradient(180deg, var(--bg-light) 0%, var(--teal-mid) 100%);
+}
+
+.product-cta__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--dark);
+  text-transform: uppercase;
+}
+
+.product-cta__subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--dark);
+  text-transform: uppercase;
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-6);
+}
+
+/* ============ FOOTER ============ */
+.site-footer {
+  background: var(--teal-mid);
+  color: var(--white);
+  padding: var(--section-pad-y-mobile) var(--section-pad-x) var(--space-8);
+}
+
+.site-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+.site-footer__brand img {
+  width: 46px;
+  height: 46px;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer__brand h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-2);
+}
+
+.site-footer__brand p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 320px;
+}
+
+.site-footer__socials {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.site-footer__social-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.78rem;
+  color: var(--white);
+}
+
+.site-footer__contact h4 {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+.site-footer__contact-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.78rem;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer__contact-row > span:first-child {
+  display: none; /* label tersembunyi, hanya untuk aksesibilitas struktur */
+}
+
+@media (min-width: 768px) {
+  .site-footer__inner {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+/* ============ DARK MODE (khusus halaman produk) ============ */
+[data-theme="dark"] .size-table {
+  border-color: #333;
+}
+[data-theme="dark"] .size-table__title {
+  border-bottom-color: #333;
+}
+[data-theme="dark"] .size-table th,
+[data-theme="dark"] .size-table td {
+  border-color: #333;
+}
+[data-theme="dark"] .size-table tbody tr:nth-child(even) {
+  background: rgba(56, 150, 131, 0.12);
+}

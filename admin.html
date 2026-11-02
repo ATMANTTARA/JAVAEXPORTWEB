@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin Dashboard | PT. Java Essence Export</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("jee-theme");
+        var theme = saved
+          ? saved
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body class="admin-body">
+    <div class="admin-gate" id="adminGate">
+      <div class="admin-gate__card">
+        <p id="adminGateText">Memeriksa akses…</p>
+        <div class="admin-gate__actions" id="adminGateActions"></div>
+      </div>
+    </div>
+
+    <div id="adminApp" hidden>
+      <header class="admin-bar">
+        <div class="admin-bar__brand">
+          <img src="img/logosmall.png" alt="PT. Java Essence Export" />
+          <strong>Admin Dashboard</strong>
+        </div>
+        <div class="admin-bar__user">
+          <span class="admin-bar__email" id="adminEmail"></span>
+          <a href="products.html" class="admin-btn admin-btn--ghost admin-btn--small">Lihat Halaman Produk</a>
+          <a href="index.html" class="admin-btn admin-btn--ghost admin-btn--small">Website</a>
+          <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="adminRefresh">Muat Ulang Data</button>
+          <button type="button" class="admin-btn admin-btn--small" id="adminLogout">Keluar</button>
+        </div>
+      </header>
+
+      <main class="admin-main">
+        <section class="admin-stats">
+          <div class="admin-stat"><strong id="statProducts">0</strong><span>Total produk</span></div>
+          <div class="admin-stat"><strong id="statPublished">0</strong><span>Produk tayang di halaman Products</span></div>
+          <div class="admin-stat"><strong id="statBuyers">0</strong><span>Calon buyer terdaftar</span></div>
+        </section>
+
+        <nav class="admin-tabs">
+          <button type="button" class="admin-tab is-active" data-tab="products">Produk</button>
+          <button type="button" class="admin-tab" data-tab="buyers">Calon Buyer</button>
+          <button type="button" class="admin-tab" data-tab="logins">Riwayat Login</button>
+        </nav>
+
+        <section id="tabProducts">
+          <div class="admin-toolbar">
+            <input type="search" class="admin-input" id="productSearch" placeholder="Cari produk…" />
+            <select class="admin-select" id="productFilter">
+              <option value="all">Semua kategori</option>
+              <option value="kitchenware">Kitchenware</option>
+              <option value="furniture">Furniture</option>
+              <option value="homedecor">Home Decor</option>
+            </select>
+            <select class="admin-select" id="placementFilter">
+              <option value="all">Semua tempat tampil</option>
+              <option value="products">Best Seller (Products)</option>
+              <option value="gallery">Gallery</option>
+            </select>
+            <span class="admin-toolbar__spacer"></span>
+            <button type="button" class="admin-btn admin-btn--ghost" id="importSeed">Impor Produk Bawaan Website</button>
+            <button type="button" class="admin-btn" id="addProduct">+ Tambah Produk</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Produk</th>
+                  <th>MOQ</th>
+                  <th>Tayang</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="productRows"></tbody>
+            </table>
+            <div class="admin-empty" id="productEmpty" hidden></div>
+          </div>
+        </section>
+
+        <section id="tabBuyers" hidden>
+          <div class="admin-toolbar">
+            <input type="search" class="admin-input" id="buyerSearch" placeholder="Cari nama atau email…" />
+            <span class="admin-toolbar__spacer"></span>
+            <button type="button" class="admin-btn admin-btn--ghost" id="exportBuyers">Unduh CSV</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Pertama masuk</th>
+                  <th>Terakhir masuk</th>
+                  <th>Jumlah login</th>
+                </tr>
+              </thead>
+              <tbody id="buyerRows"></tbody>
+            </table>
+            <div class="admin-empty" id="buyerEmpty" hidden></div>
+          </div>
+        </section>
+
+        <section id="tabLogins" hidden>
+          <div class="admin-toolbar">
+            <input type="search" class="admin-input" id="loginSearch" placeholder="Cari nama atau email…" />
+            <span class="admin-toolbar__spacer"></span>
+            <span class="admin-sub">300 login terakhir</span>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Waktu</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody id="loginRows"></tbody>
+            </table>
+            <div class="admin-empty" id="loginEmpty" hidden></div>
+          </div>
+        </section>
+      </main>
+
+      <div class="admin-modal" id="productModal" role="dialog" aria-modal="true">
+        <form class="admin-modal__panel" id="productForm" novalidate>
+          <h2 id="formTitle">Tambah Produk</h2>
+
+          <div class="admin-field">
+            <label for="fName">Nama produk *</label>
+            <input class="admin-input" id="fName" type="text" maxlength="120" />
+          </div>
+
+          <div class="admin-row">
+            <div class="admin-field">
+              <label for="fCategory">Kategori *</label>
+              <select class="admin-select" id="fCategory">
+                <option value="kitchenware">Kitchenware</option>
+                <option value="furniture">Furniture</option>
+                <option value="homedecor">Home Decor</option>
+              </select>
+            </div>
+            <div class="admin-field">
+              <label for="fMoq">MOQ</label>
+              <input class="admin-input" id="fMoq" type="text" maxlength="60" placeholder="contoh: 500 pcs" />
+            </div>
+          </div>
+
+          <div class="admin-field">
+            <label for="fDescription">Deskripsi</label>
+            <textarea class="admin-textarea" id="fDescription" maxlength="2000"></textarea>
+          </div>
+
+          <div class="admin-field">
+            <label for="fSpecs">Spesifikasi</label>
+            <textarea class="admin-textarea" id="fSpecs" placeholder="Material: Teak wood&#10;Length: 40 cm&#10;Finishing: Natural oil"></textarea>
+            <small>Satu baris satu spesifikasi, format "Nama: nilai".</small>
+          </div>
+
+          <div class="admin-field">
+            <label for="fImages">Foto (maksimal 3)</label>
+            <input class="admin-input" id="fImages" type="file" accept="image/*" multiple />
+            <small>Foto diperkecil otomatis. Foto pertama jadi foto utama.</small>
+            <div class="admin-previews" id="imagePreviews"></div>
+          </div>
+
+          <div class="admin-field">
+            <label>Tampilkan di *</label>
+            <div class="admin-checks admin-checks--tight">
+              <label><input type="checkbox" id="fInProducts" checked /> Best Seller (halaman Products, di luar gallery)</label>
+              <label><input type="checkbox" id="fInGallery" /> Gallery (halaman galeri kategori)</label>
+            </div>
+          </div>
+
+          <div class="admin-field" id="groupField" hidden>
+            <label for="fGroup">Bagian di Gallery</label>
+            <select class="admin-select" id="fGroup"></select>
+            <small>Pilih kelompok di halaman galeri tempat produk ini muncul.</small>
+          </div>
+
+          <div class="admin-checks">
+            <label><input type="checkbox" id="fPublished" checked /> Tayangkan (tampil untuk pengunjung)</label>
+          </div>
+
+          <p class="admin-form-error" id="formError" role="alert"></p>
+
+          <div class="admin-modal__actions">
+            <button type="button" class="admin-btn admin-btn--ghost" id="cancelForm">Batal</button>
+            <button type="submit" class="admin-btn" id="saveForm">Simpan</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="admin-toast" id="adminToast" role="status"></div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>
