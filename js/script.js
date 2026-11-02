@@ -262,4 +262,23 @@ function wireContactLinks() {
   });
 }
 
+function addInstagramRow() {
+  document.querySelectorAll(".site-footer__contact").forEach((box) => {
+    if (box.querySelector("[data-ig-row]")) return;
+    const row = document.createElement("a");
+    row.className = "site-footer__contact-row";
+    row.setAttribute("data-ig-row", "1");
+    row.href = CONTACT_LINKS.instagram;
+    row.target = "_blank";
+    row.rel = "noopener";
+    row.innerHTML =
+      "<span>Instagram</span>" +
+      '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">' +
+      '<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.25-3.1a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>' +
+      "<span>@javaessencexport</span>";
+    box.append(row);
+  });
+}
+
+addInstagramRow();
 wireContactLinks();
