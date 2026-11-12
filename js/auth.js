@@ -4,6 +4,8 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { recordVisit } from "./track.js";
+import "./analytics.js";
+import "./profile.js";
 import { h } from "./dom.js";
 
 const root = document.documentElement;

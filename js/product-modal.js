@@ -1,5 +1,6 @@
 import { h } from "./dom.js";
 import { CATEGORIES } from "./product-utils.js";
+import { trackEvent } from "./analytics.js";
 
 const WHATSAPP_NUMBER = "6285871113657";
 
@@ -31,6 +32,14 @@ export function closeProductModal() {
 
 export function openProductModal(product) {
   ensureModal();
+  modalPanel.dataset.pid = product.id || "";
+  modalPanel.dataset.pname = product.name || "";
+  modalPanel.dataset.pcat = product.category || "";
+  trackEvent("product_view", {
+    productId: product.id,
+    name: product.name,
+    category: product.category,
+  });
   const images = product.images || [];
   const main = h("img", {
     class: "pd-modal__main",

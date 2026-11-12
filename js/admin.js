@@ -21,6 +21,12 @@ import { recordVisit } from "./track.js";
 import { SEED_PRODUCTS } from "./seed-products.js";
 import { SEED_GALLERY } from "./seed-gallery.js";
 import { inProducts, inGallery } from "./product-utils.js";
+import {
+  renderAnalytics,
+  exportEvents,
+  exportFollowUp,
+  followUpRows,
+} from "./admin-analytics.js";
 
 const CATEGORIES = {
   kitchenware: "Kitchenware",
@@ -44,6 +50,8 @@ const state = {
   products: [],
   buyers: [],
   logins: [],
+  events: [],
+  eventsError: false,
   editingId: null,
   images: [],
   busy: false,
@@ -258,6 +266,9 @@ function renderBuyers() {
           isAdminEmail(item.email) ? h("span", { class: "admin-tag", text: "Admin" }) : null,
         ),
         h("td", { text: item.email || "-" }),
+        h("td", { text: item.country || "-" }),
+        h("td", { text: item.company || "-" }),
+        h("td", { text: item.phone || "-" }),
         h("td", { text: formatDate(item.firstLogin) }),
         h("td", { text: formatDate(item.lastLogin) }),
         h("td", { text: String(item.loginCount || 1) }),
@@ -323,6 +334,56 @@ async function loadLogins() {
   );
   state.logins = snap.docs.map((item) => ({ id: item.id, ...item.data() }));
   renderLogins();
+}
+
+function renderAnalyticsTab() {
+  renderAnalytics($("#analyticsBody"), {
+    products: state.products,
+    buyers: state.buyers,
+    logins: state.logins,
+    events: state.events,
+    eventsError: state.eventsError,
+    days: Number($("#analyticsRange").value) || 30,
+    onFollowUp: saveFollowUp,
+  });
+}
+
+async function saveFollowUp(uid, value) {
+  try {
+    await updateDoc(doc(db, "buyers", uid), {
+      followUp: value,
+      followUpAt: serverTimestamp(),
+    });
+    const item = state.buyers.find((buyer) => buyer.id === uid);
+    if (item) item.followUp = value;
+    toast("Status follow-up disimpan.");
+  } catch (error) {
+    console.error(error);
+    toast("Status gagal disimpan. Periksa aturan Firestore.", true);
+  }
+}
+
+function currentFollowUp() {
+  return followUpRows({
+    buyers: state.buyers,
+    events: state.events,
+    days: Number($("#analyticsRange").value) || 30,
+  });
+}
+
+async function loadEvents() {
+  try {
+    const snap = await getDocs(
+      query(collection(db, "events"), orderBy("at", "desc"), limit(3000)),
+    );
+    state.events = snap.docs.map((item) => ({ id: item.id, ...item.data() }));
+    state.eventsError = false;
+  } catch (error) {
+    console.warn("Aktivitas tidak dapat dimuat:", error);
+    state.events = [];
+    state.eventsError = true;
+  }
+  renderAnalyticsTab();
 }
 
 async function importSeed() {
@@ -418,7 +479,12 @@ async function importSeed() {
 
 async function loadAll() {
   try {
-    await Promise.all([loadProducts(), loadBuyers(), loadLogins()]);
+    await Promise.all([
+      loadProducts(),
+      loadBuyers(),
+      loadLogins(),
+      loadEvents(),
+    ]);
   } catch (error) {
     console.error(error);
     toast(
@@ -610,11 +676,14 @@ async function saveProduct(event) {
 }
 
 function exportBuyers() {
-  const rows = [["Nama", "Email", "Pertama masuk", "Terakhir masuk", "Jumlah login"]];
+  const rows = [["Nama", "Email", "Negara", "Perusahaan", "Telepon", "Pertama masuk", "Terakhir masuk", "Jumlah login"]];
   state.buyers.forEach((item) =>
     rows.push([
       item.name || "",
       item.email || "",
+      item.country || "",
+      item.company || "",
+      item.phone || "",
       formatDate(item.firstLogin),
       formatDate(item.lastLogin),
       item.loginCount || 1,
@@ -643,6 +712,8 @@ function switchTab(tab) {
   $("#tabProducts").hidden = tab !== "products";
   $("#tabBuyers").hidden = tab !== "buyers";
   $("#tabLogins").hidden = tab !== "logins";
+  $("#tabAnalytics").hidden = tab !== "analytics";
+  if (tab === "analytics") renderAnalyticsTab();
 }
 
 function bindUi() {
@@ -666,6 +737,9 @@ function bindUi() {
     toast("Data diperbarui.");
   });
   $("#exportBuyers").addEventListener("click", exportBuyers);
+  $("#analyticsRange").addEventListener("change", renderAnalyticsTab);
+  $("#exportFollow").addEventListener("click", () => exportFollowUp(currentFollowUp()));
+  $("#exportEvents").addEventListener("click", () => exportEvents(state.events));
   $("#adminLogout").addEventListener("click", async () => {
     await signOut(auth);
     location.href = "index.html";
